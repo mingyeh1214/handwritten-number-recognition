@@ -1,0 +1,53 @@
+#canvas_input {
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+  cursor: crosshair;
+}
+
+.tools .color_field {
+  height: 20px;
+  width: 20px;
+  min-height: 20px;
+  min-height: 20px;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 50%;
+  cursor: pointer;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #A9A9A9;
+}
+
+#canvas_output {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+}
+
+#process_output {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+}
+
+.highcharts_bar {
+  width: 300px;
+  height: 200px;
+}
+
+.confusion_matrix {
+  width: 400px;
+}
+
+.accuracy {
+  width: 400px;
+}
+
+.loss {
+  width: 400px;
+}
