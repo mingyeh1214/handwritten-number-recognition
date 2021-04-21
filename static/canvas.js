@@ -126,9 +126,9 @@ function canvasPredict(event) {
             //your code to be executed after 1 second
             //process_output.src = "./static/images/process_img.png?a=" + d.getTime();
             //}, delayInMilliseconds);
-            var rand = Math.floor(Math.random() * 10000)
-            canvas_output.src = "./static/images/canvas_img.png?" + rand;
-            process_output.src = "./static/images/process_img.png?" + rand;
+            var rand = Math.random()
+            canvas_output.src = "./static/images/canvas_img.png?a=" + rand
+            process_output.src = "./static/images/process_img.png?a=" + rand;
 
 
         }
