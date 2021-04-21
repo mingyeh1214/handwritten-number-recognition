@@ -102,7 +102,6 @@ function canvasPredict(event) {
             $('#CNN_result').text('CNN Predicted Output: ' + result["CNN_result"]);
             $('#NN2_result').text('NN2 Predicted Output: ' + result["NN2_result"]);
             $('#CNN2_result').text('CNN2 Predicted Output: ' + result["CNN2_result"]);
-            $('#res').text('res: ' + result["res"]);
             let NN_pred = JSON.parse(result["NN_pred"]);
             let NN_keys = Object.keys(NN_pred);
             let NN_values = Object.values(NN_pred);
@@ -119,16 +118,21 @@ function canvasPredict(event) {
             let CNN2_keys = Object.keys(CNN2_pred);
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");
+
+            //let d = new Date();
+            //canvas_output.src = "./static/images/canvas_img.png?a=" + d.getTime();
+            //var delayInMilliseconds = 0; //0.1 second
+            //setTimeout(function() {
+            //your code to be executed after 1 second
+            //process_output.src = "./static/images/process_img.png?a=" + d.getTime();
+            //}, delayInMilliseconds);
+            var rand = Math.floor(Math.random() * 10000)
+            canvas_output.src = "./static/images/canvas_img.png?" + rand;
+            process_output.src = "./static/images/process_img.png?" + rand;
+
+
         }
     });
-
-    let d = new Date();
-    canvas_output.src = "./static/images/canvas_img.png?a=" + d.getTime();
-    var delayInMilliseconds = 100; //0.1 second
-    setTimeout(function() {
-    //your code to be executed after 1 second
-    process_output.src = "./static/images/process_img.png?a=" + d.getTime();
-    }, delayInMilliseconds);
 
     canvasClear();
 

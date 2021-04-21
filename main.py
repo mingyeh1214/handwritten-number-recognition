@@ -50,7 +50,7 @@ def predict():
     key = range(0,10)
     CNN2_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
     
-    return {"res": "ok", "NN_result": NN_result, "NN2_result": NN2_result, "CNN_result": CNN_result, "CNN2_result": CNN2_result, 
+    return {"NN_result": NN_result, "NN2_result": NN2_result, "CNN_result": CNN_result, "CNN2_result": CNN2_result, 
     "NN_pred": json.dumps(NN_pred_dict), "CNN_pred": json.dumps(CNN_pred_dict), "NN2_pred": json.dumps(NN2_pred_dict), "CNN2_pred": json.dumps(CNN2_pred_dict)}
 
 def parseImg(imgData):
