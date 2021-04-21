@@ -1,19 +1,13 @@
 from flask import Flask, render_template, request
 import base64
 import re
-from cv2 import cv2
+#from cv2 import cv2
 import tensorflow as tf
 import numpy as np
 import json
-#from train import image_grey2black
+from train import image_grey2black
 
 app = Flask(__name__)
-
-def image_grey2black(image_origin, threshold):
-    image_turn = np.empty_like(image_origin)
-    image_turn[image_origin < threshold] = 0
-    image_turn[image_origin >= threshold] = 255
-    return image_turn
 
 @app.route("/")
 def index():
