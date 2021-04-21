@@ -102,6 +102,7 @@ function canvasPredict(event) {
             $('#CNN_result').text('CNN Predicted Output: ' + result["CNN_result"]);
             $('#NN2_result').text('NN2 Predicted Output: ' + result["NN2_result"]);
             $('#CNN2_result').text('CNN2 Predicted Output: ' + result["CNN2_result"]);
+            $('#res').text('res: ' + result["res"]);
             let NN_pred = JSON.parse(result["NN_pred"]);
             let NN_keys = Object.keys(NN_pred);
             let NN_values = Object.values(NN_pred);
