@@ -98,10 +98,10 @@ function canvasPredict(event) {
         url: "/predict/",
         data: img,
         success: function(result){
-            $('#NN_result').text('NN Predicted Output: ' + result["NN_result"]);
-            $('#CNN_result').text('CNN Predicted Output: ' + result["CNN_result"]);
-            $('#NN2_result').text('NN2 Predicted Output: ' + result["NN2_result"]);
-            $('#CNN2_result').text('CNN2 Predicted Output: ' + result["CNN2_result"]);
+            $('#NN_result').text('Forecast: ' + result["NN_result"]);
+            $('#CNN_result').text('Forecast: ' + result["CNN_result"]);
+            $('#NN2_result').text('Forecast: ' + result["NN2_result"]);
+            $('#CNN2_result').text('Forecast: ' + result["CNN2_result"]);
             let NN_pred = JSON.parse(result["NN_pred"]);
             let NN_keys = Object.keys(NN_pred);
             let NN_values = Object.values(NN_pred);

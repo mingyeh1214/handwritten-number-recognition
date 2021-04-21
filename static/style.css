@@ -1,7 +1,4 @@
 #canvas_input {
-  border-radius: 5px;
-  border-style: solid;
-  border-width: thin;
   cursor: crosshair;
 }
 
@@ -36,8 +33,7 @@
 }
 
 .highcharts_bar {
-  width: 300px;
-  height: 200px;
+  height: 250px;
 }
 
 .confusion_matrix {
@@ -50,4 +46,18 @@
 
 .loss {
   width: 400px;
+}
+
+.background-mnist { 
+  /* The image used */
+  background-image: url("/static/images/background_mnist.png");
+
+  /* Full height */
+  height: 250px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }

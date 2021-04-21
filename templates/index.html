@@ -8,24 +8,29 @@
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}">
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar sticky-top navbar-light bg-light">
       <div class="container-fluid">
-        <div class="navbar-brand">
-          <img src="{{ url_for('static', filename='images/navbar-brand.png') }}" alt="" height="40", class="d-inline-block align-text-middle">
+        <span class="navbar-brand">
+          <img src="{{ url_for('static', filename='images/navbar-brand.png') }}" alt="" height="30", class="d-inline-block align-top">
           DEEP LEARNING
-        </div>
+        </span>
         <span class="navbar-text">
           Handwritten Number Recognition
         </span>
       </div>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row justify-content-center mt-2">
-        <div class="col-12 d-flex justify-content-center">
-          <canvas id="canvas_input"></canvas>
-        </div>
+  <!-- Background image -->
+  <div class="container">
+    <div class="mt-2 rounded-3 text-center background-mnist">
+      <div class="d-flex justify-content-center align-items-center h-100">
+          <canvas id="canvas_input" class="border border-dark rounded-lg shadow-sm border-3"></canvas>
       </div>
+  </div>
+  </div>
+  <!-- Background image -->
+    
+    <div class="container">
       <div class="row justify-content-center mt-2">
         <div class="col-12 d-flex justify-content-center">
           <div class="tools">
@@ -38,39 +43,92 @@
       </div>
       <div class="row justify-content-center mt-2">
         <div class="col-12 d-flex justify-content-center">
-          <button type="button" id="canvas_clear" class="btn btn-secondary btn-sm m-1">Clear</button>
-          <button type="button" id="canvas_undo" class="btn btn-secondary btn-sm m-1">Undo</button>
-          <button type="button" id="canvas_predict" class="btn btn-secondary btn-sm m-1">Predict</button>
+          <button type="button" id="canvas_clear" class="btn btn-light btn-sm m-1">Clear</button>
+          <button type="button" id="canvas_undo" class="btn btn-light btn-sm m-1">Undo</button>
+          <button type="button" id="canvas_predict" class="btn btn-primary btn-sm m-1">Predict</button>
         </div>
       </div>
-      <hr class="bg-secondary border-2 border-top border-secondary">
+      <hr>
       <div class="row justify-content-center mt-2">
         <div class="col-12 d-flex justify-content-center">
-          <img id="canvas_output">
-          <img id="process_output"> 
+          <img id="canvas_output" class="m-2">
+          <img id="process_output" class="m-2"> 
         </div>
       </div>
     </div>
-    <div class="container">
+
+
+    <div class="container mt-2">
       <div class="row">
-        <div class="col-3">
-          <p id="NN_result"></p>
-          <div class="highcharts_bar" id="NN_result_bar"></div>
+        <div class="col-sm-3">
+          <div class="card">
+
+            <h5 class="card-header">
+              NN
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="NN_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="NN_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
         </div>
-        <div class="col-3">
-          <p id="CNN_result"></p>
-          <div class="highcharts_bar" id="CNN_result_bar"></div>
+        <div class="col-sm-3">
+          <div class="card">
+            
+            <h5 class="card-header">
+              NN2
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="NN2_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="NN2_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
         </div>
-        <div class="col-3">
-          <p id="NN2_result"></p>
-          <div class="highcharts_bar" id="NN2_result_bar"></div>
+        <div class="col-sm-3">
+          <div class="card">
+            
+            <h5 class="card-header">
+              CNN
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="CNN_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="CNN_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
         </div>
-        <div class="col-3">
-          <p id="CNN2_result"></p>
-          <div class="highcharts_bar" id="CNN2_result_bar"></div>
+        <div class="col-sm-3">
+          <div class="card">
+            
+            <h5 class="card-header">
+              CNN2
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="CNN2_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="CNN2_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+
+
 
     <div class="container">
       <div class="row">

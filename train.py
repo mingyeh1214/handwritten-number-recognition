@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import gridspec
 import seaborn as sns
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -7,6 +8,22 @@ from tensorflow.keras.layers import Flatten, Dense, Dropout, Conv2D, MaxPooling2
 from tensorflow.keras.utils import to_categorical
 from tensorflow.math import confusion_matrix
 import imutils
+
+row_num, col_num=6,10
+
+def plot(col_num, row_num):
+    (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+    fig, axs = plt.subplots(row_num, col_num, figsize = (16, 9))
+    plt.subplots_adjust(wspace =0.0, hspace = 0.0)
+    for i in range(row_num):
+        for j in range(col_num):
+            idx = i * col_num + j
+            print(idx)
+            axs[i, j].imshow(x_train[idx].reshape(28, 28), cmap = 'gray', aspect='auto')
+            axs[i, j].axis('off')
+    fig.savefig("test.png", bbox_inches = 'tight', pad_inches = 0)
+
+plot(16,9)
 
 def mnist_data():
     img_rows = img_cols = 28
