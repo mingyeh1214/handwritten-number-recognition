@@ -6,7 +6,7 @@ from cv2 import cv2
 import tensorflow as tf
 import numpy as np
 import json
-from train import image_grey2black
+#from train import image_grey2black
 
 app = Flask(__name__)
 
