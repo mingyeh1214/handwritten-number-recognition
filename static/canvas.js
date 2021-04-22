@@ -116,7 +116,7 @@ function canvasPredict(event) {
             let CNN2_keys = Object.keys(CNN2_pred);
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");*/
-
+            $('#res').text('res: ' + result["res"]);
             var canvas_output = document.getElementById("canvas_output");
             var process_output = document.getElementById("process_output");
             canvas_output.src = "./static/images/canvas_img.png?" + new Date().getTime();

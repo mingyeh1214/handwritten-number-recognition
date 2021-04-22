@@ -84,7 +84,7 @@ def model_NN(x_train, y_train):
     model = Sequential()
     model.add(Flatten(input_shape = (28, 28)))
     model.add(Dense(units = 128, activation = 'relu'))
-    model.add(Dropout(0.25))
+    model.add(Dropout(0.2))
     model.add(Dense(units = 10, activation = 'softmax'))
     model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
     history = model.fit(x = x_train, y = y_train, batch_size = batch_size, epochs = epochs)

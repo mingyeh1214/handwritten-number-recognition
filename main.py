@@ -33,8 +33,8 @@ def predict():
     # get data from drawing canvas and save as image
     parseImg(request.get_data())
 
-    img = cv2.imread("./static/images/process_img.png", cv2.IMREAD_GRAYSCALE)
-    img = img.reshape(1,28,28,1) / 255.0
+    #img = cv2.imread("./static/images/process_img.png", cv2.IMREAD_GRAYSCALE)
+    #img = img.reshape(1,28,28,1) / 255.0
 
     
     #NN_pred = model_NN.predict(img)
