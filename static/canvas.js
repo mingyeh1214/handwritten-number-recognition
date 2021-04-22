@@ -128,6 +128,7 @@ function canvasPredict(event) {
             //}, delayInMilliseconds);
             var rand = Math.random()
             canvas_output.src = "./static/images/canvas_img.png?a=" + rand
+            var rand = Math.random()
             process_output.src = "./static/images/process_img.png?a=" + rand;
 
 

@@ -1,0 +1,4 @@
+.gcloudignore
+.gitignore
+# Python pycache:
+__pycache__/
