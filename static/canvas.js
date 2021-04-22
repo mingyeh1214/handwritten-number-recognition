@@ -2,8 +2,6 @@ const canvas = document.getElementById("canvas_input");
 const canvas_clear = document.getElementById("canvas_clear");
 const canvas_undo = document.getElementById("canvas_undo");
 const canvas_predict = document.getElementById("canvas_predict");
-const canvas_output = document.getElementById("canvas_output");
-const process_output = document.getElementById("process_output");
 
 let context = canvas.getContext("2d");
 let background_color = "white"
@@ -119,18 +117,10 @@ function canvasPredict(event) {
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");
 
-            //let d = new Date();
-            //canvas_output.src = "./static/images/canvas_img.png?a=" + d.getTime();
-            //var delayInMilliseconds = 0; //0.1 second
-            //setTimeout(function() {
-            //your code to be executed after 1 second
-            //process_output.src = "./static/images/process_img.png?a=" + d.getTime();
-            //}, delayInMilliseconds);
-            var rand = Math.random()
-            canvas_output.src = "./static/images/canvas_img.png?a=" + rand
-            var rand = Math.random()
-            process_output.src = "./static/images/process_img.png?a=" + rand;
-
+            var canvas_output = document.getElementById("canvas_output");
+            var process_output = document.getElementById("process_output");
+            canvas_output.src = "./static/images/canvas_img.png?" + new Date().getTime();
+            process_output.src = "./static/images/process_img.png?" + new Date().getTime();
 
         }
     });
