@@ -96,7 +96,7 @@ function canvasPredict(event) {
         url: "/predict/",
         data: img,
         success: function(result){
-            $('#NN_result').text('Forecast: ' + result["NN_result"]);
+            /*$('#NN_result').text('Forecast: ' + result["NN_result"]);
             $('#CNN_result').text('Forecast: ' + result["CNN_result"]);
             $('#NN2_result').text('Forecast: ' + result["NN2_result"]);
             $('#CNN2_result').text('Forecast: ' + result["CNN2_result"]);
@@ -115,7 +115,7 @@ function canvasPredict(event) {
             let CNN2_pred = JSON.parse(result["CNN2_pred"]);
             let CNN2_keys = Object.keys(CNN2_pred);
             let CNN2_values = Object.values(CNN2_pred);
-            highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");
+            highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");*/
 
             var canvas_output = document.getElementById("canvas_output");
             var process_output = document.getElementById("process_output");

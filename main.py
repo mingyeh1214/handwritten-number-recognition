@@ -10,18 +10,18 @@ from train import image_grey2black
 app = Flask(__name__)
 
 
-def init_models(): 
-    model_NN = tf.keras.models.load_model("./models/NN.h5")
-    model_CNN = tf.keras.models.load_model("./models/CNN.h5")
-    model_NN2 = tf.keras.models.load_model("./models/NN2.h5")
-    model_CNN2 = tf.keras.models.load_model("./models/CNN2.h5")
-    print("Loaded Models from disk")
-    return model_NN, model_CNN, model_NN2, model_CNN2
+#def init_models(): 
+#    model_NN = tf.keras.models.load_model("./models/NN.h5")
+#    model_CNN = tf.keras.models.load_model("./models/CNN.h5")
+#    model_NN2 = tf.keras.models.load_model("./models/NN2.h5")
+#    model_CNN2 = tf.keras.models.load_model("./models/CNN2.h5")
+#    print("Loaded Models from disk")
+#    return model_NN, model_CNN, model_NN2, model_CNN2
 
 #global vars for easy reusability
-global model_NN , model_CNN, model_NN2, model_CNN2
+#global model_NN , model_CNN, model_NN2, model_CNN2
 #initialize these variables
-model_NN , model_CNN, model_NN2, model_CNN2 = init_models()
+#model_NN , model_CNN, model_NN2, model_CNN2 = init_models()
 
 @app.route("/")
 def index():
@@ -36,36 +36,37 @@ def predict():
     img = cv2.imread("./static/images/process_img.png", cv2.IMREAD_GRAYSCALE)
     img = img.reshape(1,28,28,1) / 255.0
 
-
-    NN_pred = model_NN.predict(img)
-    NN_result = str(np.argmax(NN_pred, axis = 1)[0])
-    value = np.round(np.ndarray.tolist(NN_pred[0]), 4)
-    key = range(0,10)
-    NN_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
+    
+    #NN_pred = model_NN.predict(img)
+    #NN_result = str(np.argmax(NN_pred, axis = 1)[0])
+    #value = np.round(np.ndarray.tolist(NN_pred[0]), 4)
+    #key = range(0,10)
+    #NN_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
     
 
-    CNN_pred = model_CNN.predict(img)
-    CNN_result = str(np.argmax(CNN_pred, axis = 1)[0])
-    value = np.round(np.ndarray.tolist(CNN_pred[0]), 4)
-    key = range(0,10)
-    CNN_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
+    #CNN_pred = model_CNN.predict(img)
+    #CNN_result = str(np.argmax(CNN_pred, axis = 1)[0])
+    #value = np.round(np.ndarray.tolist(CNN_pred[0]), 4)
+    #key = range(0,10)
+    #CNN_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
     
 
-    NN2_pred = model_NN2.predict(img)
-    NN2_result = str(np.argmax(NN2_pred, axis = 1)[0])
-    value = np.round(np.ndarray.tolist(NN2_pred[0]), 4)
-    key = range(0,10)
-    NN2_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
+    #NN2_pred = model_NN2.predict(img)
+    #NN2_result = str(np.argmax(NN2_pred, axis = 1)[0])
+    #value = np.round(np.ndarray.tolist(NN2_pred[0]), 4)
+    #key = range(0,10)
+    #NN2_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
 
 
-    CNN2_pred = model_CNN2.predict(img)
-    CNN2_result = str(np.argmax(CNN2_pred, axis = 1)[0])
-    value = np.round(np.ndarray.tolist(CNN2_pred[0]), 4)
-    key = range(0,10)
-    CNN2_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
+    #CNN2_pred = model_CNN2.predict(img)
+    #CNN2_result = str(np.argmax(CNN2_pred, axis = 1)[0])
+    #value = np.round(np.ndarray.tolist(CNN2_pred[0]), 4)
+    #key = range(0,10)
+    #CNN2_pred_dict = dict(sorted(dict(zip(key, value)).items(), key=lambda item: item[1], reverse = True))
     
-    return {"NN_result": NN_result, "NN2_result": NN2_result, "CNN_result": CNN_result, "CNN2_result": CNN2_result, 
-    "NN_pred": json.dumps(NN_pred_dict), "CNN_pred": json.dumps(CNN_pred_dict), "NN2_pred": json.dumps(NN2_pred_dict), "CNN2_pred": json.dumps(CNN2_pred_dict)}
+    #return {"NN_result": NN_result, "NN2_result": NN2_result, "CNN_result": CNN_result, "CNN2_result": CNN2_result, 
+    #"NN_pred": json.dumps(NN_pred_dict), "CNN_pred": json.dumps(CNN_pred_dict), "NN2_pred": json.dumps(NN2_pred_dict), "CNN2_pred": json.dumps(CNN2_pred_dict)}
+    return {"res": "done"}
 
 def parseImg(imgData):
     # parse canvas bytes and save as output.png
