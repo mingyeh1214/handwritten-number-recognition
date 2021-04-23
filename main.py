@@ -32,7 +32,7 @@ def index():
 @app.route('/predict/', methods=['GET', 'POST'])
 def predict():
     # get data from drawing canvas and save as image
-    canvas_img_url, process_img_url = parseImg(request.get_data())
+    canvas_img_url, process_img_url, img_idx = parseImg(request.get_data())
 
     #img = cv2.imread("./static/images/process_img.png", cv2.IMREAD_GRAYSCALE)
     #img = img.reshape(1,28,28,1) / 255.0
@@ -67,7 +67,7 @@ def predict():
     
     #return {"NN_result": NN_result, "NN2_result": NN2_result, "CNN_result": CNN_result, "CNN2_result": CNN2_result, 
     #"NN_pred": json.dumps(NN_pred_dict), "CNN_pred": json.dumps(CNN_pred_dict), "NN2_pred": json.dumps(NN2_pred_dict), "CNN2_pred": json.dumps(CNN2_pred_dict)}
-    return {"canvas_img_url" : canvas_img_url, "process_img_url": process_img_url}
+    return {"canvas_img_url" : canvas_img_url, "process_img_url": process_img_url, "img_idx": str(img_idx)}
 
 def parseImg(imgData):
     img_df_url = "./static/dataset/img.csv"
@@ -112,7 +112,7 @@ def parseImg(imgData):
     image = image_grey2black(image, 255 / 8)
     process_img_url = "./static/images/process_img_" + str(img_idx) + ".png"
     cv2.imwrite(process_img_url, image)
-    return canvas_img_url, process_img_url
+    return canvas_img_url, process_img_url, img_idx
 
 if __name__ == "__main__":
     app.run(debug=True)
