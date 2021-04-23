@@ -96,8 +96,7 @@ function canvasPredict(event) {
         url: "/predict/",
         data: img,
         success: function(result){
-            setTimeout(() => {  console.log("Stop few sex!"); }, 2000);
-            /*$('#NN_result').text('Forecast: ' + result["NN_result"]);
+            $('#NN_result').text('Forecast: ' + result["NN_result"]);
             $('#CNN_result').text('Forecast: ' + result["CNN_result"]);
             $('#NN2_result').text('Forecast: ' + result["NN2_result"]);
             $('#CNN2_result').text('Forecast: ' + result["CNN2_result"]);
@@ -116,15 +115,10 @@ function canvasPredict(event) {
             let CNN2_pred = JSON.parse(result["CNN2_pred"]);
             let CNN2_keys = Object.keys(CNN2_pred);
             let CNN2_values = Object.values(CNN2_pred);
-            highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");*/
+            highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");
            
-            $('#img_idx').text('img_idx:' + result["img_idx"]);
-            document.getElementById("canvas_output").src=result["canvas_img_url"];
-            document.getElementById("process_output").src=result["process_img_url"];
-            //var canvas_output = document.getElementById("canvas_output");
-            //var process_output = document.getElementById("process_output");
-            //canvas_output.src = "./static/images/canvas_img.png?" + new Date().getTime();
-            //process_output.src = "./static/images/process_img.png?" + new Date().getTime();
+            document.getElementById("canvas_output").src = result["canvas_img_url"];
+            document.getElementById("process_output").src = result["process_img_url"];
 
         }
     });
@@ -172,4 +166,3 @@ function highcharts_bar(keys, values, id) {
 
     return $(id).highcharts(json);
 }
-

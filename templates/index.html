@@ -11,19 +11,18 @@
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}">
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-light bg-light">
+    <nav class="navbar sticky-top navbar-light bg-light border-bottom">
       <div class="container-fluid">
         <span class="navbar-brand">
           <img src="{{ url_for('static', filename='images/navbar-brand.png') }}" alt="" height="30", class="d-inline-block align-top">
           DEEP LEARNING
         </span>
         <span class="navbar-text">
-          Handwritten Number Recognition ver:2003
+          Handwritten Number Recognition ver:0.1
         </span>
       </div>
     </nav>
 
-  <!-- Background image -->
   <div class="container-fluid">
     <div class="mt-2 rounded-3 text-center background-mnist" style="background-image: url('static/images/background_mnist.png');">
       <div class="d-flex justify-content-center align-items-center h-100">
@@ -31,7 +30,6 @@
       </div>
   </div>
   </div>
-  <!-- Background image -->
     
     <div class="container">
       <div class="row justify-content-center mt-2">
@@ -51,7 +49,6 @@
           <button type="button" id="canvas_predict" class="btn btn-primary btn-sm m-1">Predict</button>
         </div>
       </div>
-      <p id="img_idx"></p>
       <hr>
       <div class="row justify-content-center mt-2">
         <div class="col-12 d-flex justify-content-center">
@@ -60,9 +57,6 @@
         </div>
       </div>
     </div>
-
-  
-
 
     <div class="container mt-2">
       <div class="row">
@@ -133,9 +127,6 @@
       </div>
       <hr>
     </div>
-
-
-
 
     <div class="container">
       <div class="row">
