@@ -6,6 +6,7 @@ import tensorflow as tf
 import numpy as np
 import json
 from train import image_grey2black
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def index():
 @app.route('/predict/', methods=['GET', 'POST'])
 def predict():
     # get data from drawing canvas and save as image
-    parseImg(request.get_data())
+    canvas_img_url, process_img_url = parseImg(request.get_data())
 
     #img = cv2.imread("./static/images/process_img.png", cv2.IMREAD_GRAYSCALE)
     #img = img.reshape(1,28,28,1) / 255.0
@@ -66,17 +67,21 @@ def predict():
     
     #return {"NN_result": NN_result, "NN2_result": NN2_result, "CNN_result": CNN_result, "CNN2_result": CNN2_result, 
     #"NN_pred": json.dumps(NN_pred_dict), "CNN_pred": json.dumps(CNN_pred_dict), "NN2_pred": json.dumps(NN2_pred_dict), "CNN2_pred": json.dumps(CNN2_pred_dict)}
-    return {"res": "done"}
+    return {"canvas_img_url" : canvas_img_url, "process_img_url": process_img_url}
 
 def parseImg(imgData):
+    img_df_url = "./static/dataset/img.csv"
+    img_df = pd.read_csv(img_df_url)
+    img_idx = np.max(img_df["index"]) + 1
+    img_df = img_df.append(pd.Series({'index': img_idx}), ignore_index = True)
+    img_df.to_csv(img_df_url, index = False)
     # parse canvas bytes and save as output.png
+    canvas_img_url = "./static/images/canvas_img_" + str(img_idx) + ".png"
     imgstr = re.search(b'base64,(.*)', imgData).group(1)
-    with open("./static/images/canvas_img.png", 'wb') as output:
+    with open(canvas_img_url, 'wb') as output:
         output.write(base64.decodebytes(imgstr))
-    img_preprocess()
-
-def img_preprocess():
-    image = cv2.imread('./static/images/canvas_img.png')
+    
+    image = cv2.imread(canvas_img_url)
     image = 255 - cv2.cvtColor(image.copy(), cv2.COLOR_BGR2GRAY)
     image = image_grey2black(image, 255 / 8)
     contours, _ = cv2.findContours(image.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -105,7 +110,9 @@ def img_preprocess():
     inp = np.array(preprocessed_digits)
     image = cv2.resize(inp[0], (28, 28))
     image = image_grey2black(image, 255 / 8)
-    cv2.imwrite("./static/images/process_img.png", image)
+    process_img_url = "./static/images/process_img_" + str(img_idx) + ".png"
+    cv2.imwrite(process_img_url, image)
+    return canvas_img_url, process_img_url
 
 if __name__ == "__main__":
     app.run(debug=True)
