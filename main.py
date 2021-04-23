@@ -6,10 +6,10 @@ import tensorflow as tf
 import numpy as np
 import json
 from train import image_grey2black
+from gcpbucket import *
 import pandas as pd
 
 app = Flask(__name__)
-
 
 #def init_models(): 
 #    model_NN = tf.keras.models.load_model("./models/NN.h5")
@@ -70,18 +70,30 @@ def predict():
     return {"canvas_img_url" : canvas_img_url, "process_img_url": process_img_url, "img_idx": str(img_idx)}
 
 def parseImg(imgData):
-    img_df_url = "./static/dataset/img.csv"
-    img_df = pd.read_csv(img_df_url)
+    
+    #img_df_url = "./static/dataset/img.csv"
+    #img_df = pd.read_csv(img_df_url)
+    img_df = read_csv_bucket("img.csv")
+
     img_idx = np.max(img_df["index"]) + 1
     img_df = img_df.append(pd.Series({'index': img_idx}), ignore_index = True)
-    img_df.to_csv(img_df_url, index = False)
+    #img_df.to_csv(img_df_url, index = False)
+    write_csv_bucket(img_df, "img.csv")
+
     # parse canvas bytes and save as output.png
-    canvas_img_url = "./static/images/canvas_img_" + str(img_idx) + ".png"
+    #canvas_img_url = "./static/images/canvas_img_" + str(img_idx) + ".png"
     imgstr = re.search(b'base64,(.*)', imgData).group(1)
-    with open(canvas_img_url, 'wb') as output:
+    with open("temp.png", 'wb') as output:
         output.write(base64.decodebytes(imgstr))
-    
-    image = cv2.imread(canvas_img_url)
+  
+    file_name = "canvas_img_" + str(img_idx) + ".png"
+    bucket.blob(file_name).upload_from_filename("temp.png", content_type = 'image/png')
+    canvas_img_url = "https://storage.cloud.google.com/ageless-aura-311408-bucket/{}".format(file_name) 
+    #write_png_bucket(image, file_name)
+    print("write png done")
+
+    image = cv2.imread("temp.png")
+
     image = 255 - cv2.cvtColor(image.copy(), cv2.COLOR_BGR2GRAY)
     image = image_grey2black(image, 255 / 8)
     contours, _ = cv2.findContours(image.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -110,8 +122,11 @@ def parseImg(imgData):
     inp = np.array(preprocessed_digits)
     image = cv2.resize(inp[0], (28, 28))
     image = image_grey2black(image, 255 / 8)
-    process_img_url = "./static/images/process_img_" + str(img_idx) + ".png"
-    cv2.imwrite(process_img_url, image)
+    #process_img_url = "./static/images/process_img_" + str(img_idx) + ".png"
+    #cv2.imwrite(process_img_url, image)
+    file_name = "process_img_" + str(img_idx) + ".png"
+    process_img_url = "https://storage.cloud.google.com/ageless-aura-311408-bucket/{}".format(file_name) 
+    write_png_bucket(image, file_name)
     return canvas_img_url, process_img_url, img_idx
 
 if __name__ == "__main__":
