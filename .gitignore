@@ -4,4 +4,4 @@ venv/
 .vscode/
 __pycache__/
 __pycache__
-gcp-bucket.json
+gcp_bucket.json
