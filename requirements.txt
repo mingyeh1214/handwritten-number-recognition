@@ -53,3 +53,4 @@ typish==1.9.2
 urllib3==1.26.4
 Werkzeug==1.0.1
 wrapt==1.12.1
+google-cloud-storage==1.37.0

@@ -2,3 +2,4 @@
 venv/
 .vscode
 .vscode/
+gcp-bucket.json

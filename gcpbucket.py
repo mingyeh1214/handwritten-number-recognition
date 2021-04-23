@@ -14,8 +14,9 @@ except Exception as e:
 
 PATH = os.path.join(os.getcwd(), 'static/gcp-bucket.json')
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
-storage_client = storage.Client(PATH)
-bucket = storage_client.get_bucket('ageless-aura-311408-bucket')
+GAC = os.environ['GOOGLE_APPLICATION_CREDENTIALS']
+storage_client = storage.Client()
+bucket = storage_client.get_bucket(GAC)
 
 def write_csv_bucket(df, file_name):
     blob = bucket.blob(file_name)
@@ -33,4 +34,6 @@ def write_png_bucket(image, file_name):
     blob.upload_from_filename(temp_name, content_type = 'image/png')
 
 def read_img_bucket():
-    image = cv2.imread("https://storage.cloud.google.com/ageless-aura-311408-bucket/yaya.png")
+    blob = bucket.blob("canvas_img_10.png")
+    query = io.BytesIO(bucket.blob(blob_name = "canvas_img_10.png").download_as_string())
+
