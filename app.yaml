@@ -4,3 +4,12 @@ entrypoint: gunicorn -b :$PORT main:app
 
 runtime_config:
   python_version: 3
+
+# 1. The handlers key not indented
+#handlers:
+  # 2. The URL key indented and with leading -
+  # 3. The URL value WITH a leading /
+ # - url: /static
+  # 3. The static_dir key behind the url
+  # 4. The static dir value WITHOUT the leading / 
+  #  static_dir: static

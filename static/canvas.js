@@ -96,6 +96,7 @@ function canvasPredict(event) {
         url: "/predict/",
         data: img,
         success: function(result){
+            setTimeout(() => {  console.log("Stop few sex!"); }, 2000);
             /*$('#NN_result').text('Forecast: ' + result["NN_result"]);
             $('#CNN_result').text('Forecast: ' + result["CNN_result"]);
             $('#NN2_result').text('Forecast: ' + result["NN2_result"]);
@@ -117,9 +118,11 @@ function canvasPredict(event) {
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");*/
             alert(result["img_idx"]);
+            alert(result["canvas_img_url"]);
+            alert(result["process_img_url"]);
             $('#img_idx').text('img_idx:' + result["img_idx"]);
-            document.getElementById("canvas_output").src=result["canvas_img_url"];
-            document.getElementById("process_output").src=result["process_img_url"];
+            document.getElementById("canvas_output").src=result["canvas_img_url"].concat("?") + new Date().getTime();
+            document.getElementById("process_output").src=result["process_img_url"].concat("?") + new Date().getTime();
             //var canvas_output = document.getElementById("canvas_output");
             //var process_output = document.getElementById("process_output");
             //canvas_output.src = "./static/images/canvas_img.png?" + new Date().getTime();
