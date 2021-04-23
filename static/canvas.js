@@ -116,7 +116,8 @@ function canvasPredict(event) {
             let CNN2_keys = Object.keys(CNN2_pred);
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");*/
-            $('#img_idx').text('img_idx: ' + result["img_idx"]);
+            alert(result["img_idx"]);
+            $('#img_idx').text('img_idx:' + result["img_idx"]);
             document.getElementById("canvas_output").src=result["canvas_img_url"];
             document.getElementById("process_output").src=result["process_img_url"];
             //var canvas_output = document.getElementById("canvas_output");
