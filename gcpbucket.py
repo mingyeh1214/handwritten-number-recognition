@@ -12,11 +12,11 @@ try:
 except Exception as e:
     print("Error: {} ".format(e))
 
-PATH = os.path.join(os.getcwd(), 'static/gcp-bucket.json')
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
-GAC = os.environ['GOOGLE_APPLICATION_CREDENTIALS']
+#PATH = os.path.join(os.getcwd(), 'static/gcp-bucket.json')
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
+CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
 storage_client = storage.Client()
-bucket = storage_client.get_bucket(GAC)
+bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
 
 def write_csv_bucket(df, file_name):
     blob = bucket.blob(file_name)
