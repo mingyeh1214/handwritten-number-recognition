@@ -5,14 +5,14 @@ import io
 from cv2 import cv2
 
 ####本機上測試用####
-PATH = os.path.join(os.getcwd(), 'gcp_bucket.json')
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
-bucket = storage.Client(PATH).get_bucket("ageless-aura-311408-bucket")
+#PATH = os.path.join(os.getcwd(), 'gcp_bucket.json')
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
+#bucket = storage.Client(PATH).get_bucket("ageless-aura-311408-bucket")
 
 ####deploy時使用####
-#CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
-#storage_client = storage.Client()
-#bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
+CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
+storage_client = storage.Client()
+bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
 
 def write_csv_bucket(df, file_name):
     blob = bucket.blob(file_name)
