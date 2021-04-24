@@ -54,7 +54,10 @@ def parseImg(imgData):
     file_name = "process_img_" + str(img_idx) + ".png"
     process_img_url = "https://storage.cloud.google.com/ageless-aura-311408-bucket/{}".format(file_name) 
     write_png_bucket(image, file_name)
-    return canvas_img_url, process_img_url, img_idx
+
+    img = image.reshape(1,28,28,1) / 255.0
+
+    return canvas_img_url, process_img_url, img_idx, img
 
 app = Flask(__name__)
 
@@ -64,8 +67,8 @@ def index():
 
 @app.route('/predict/', methods=['GET', 'POST'])
 def predict():
-    canvas_img_url, process_img_url, img_idx = parseImg(request.get_data())
- 
+    canvas_img_url, process_img_url, img_idx, img = parseImg(request.get_data())
+
     NN_pred = model_NN.predict(img)
     NN_result = str(np.argmax(NN_pred, axis = 1)[0])
     value = np.round(np.ndarray.tolist(NN_pred[0]), 4)
