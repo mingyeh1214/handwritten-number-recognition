@@ -2,15 +2,9 @@
   cursor: crosshair;
 }
 
-#tools {
-
-}
-
 #color_fields {
   float: left;
 }
-
-
 
 .color_field {
   height: 25px;
