@@ -6,4 +6,4 @@ runtime_config:
   python_version: 3
 
 env_variables:
-  CLOUD_STORAGE_BUCKET: ageless-aura-311408-bucket
+  CLOUD_STORAGE_BUCKET: stone-resource-311918-bucket

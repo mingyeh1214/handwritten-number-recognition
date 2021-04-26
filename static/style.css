@@ -2,11 +2,21 @@
   cursor: crosshair;
 }
 
-.tools .color_field {
-  height: 20px;
-  width: 20px;
-  min-height: 20px;
-  min-height: 20px;
+#tools {
+
+}
+
+#color_fields {
+  float: left;
+}
+
+
+
+.color_field {
+  height: 25px;
+  width: 25px;
+  min-height: 25px;
+  min-height: 25px;
   display: inline-block;
   box-sizing: border-box;
   border-radius: 50%;
@@ -14,6 +24,15 @@
   border-style: solid;
   border-width: 1px;
   border-color: #A9A9A9;
+}
+
+.color_field.active {
+  border-width: 3px;
+}
+
+.lwcontral {
+  display: inline-block;
+  text-align: center;
 }
 
 #canvas_output {

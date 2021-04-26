@@ -6,7 +6,7 @@ const canvas_predict = document.getElementById("canvas_predict");
 let context = canvas.getContext("2d");
 let background_color = "white"
 let draw_color = "black";
-let draw_width = "12";
+let draw_width = 12;
 let is_drawing = false;
 let restore_array = [];
 let index = -1;
@@ -27,9 +27,43 @@ canvas_clear.addEventListener("click", canvasClear, false);
 canvas_undo.addEventListener("click", canvasUndo, false);
 canvas_predict.addEventListener("click", canvasPredict, false);
 
-function change_color(element) {
-    draw_color = element.style.background;
+var color_fields = document.getElementsByClassName("color_field");
+for(var i=0, n=color_fields.length; i<n; i++){
+    color_fields[i].addEventListener("click", change_color);
 }
+
+function change_color(element) {
+    var color_field = element.target;
+    var active = document.getElementsByClassName("active")[0]
+    draw_color = color_field.style.backgroundColor;
+    if(active){
+        active.className = "color_field";
+    }
+    color_field.className += " active";
+}
+const lwval = document.getElementById("lwval");
+
+function set_lw(newlwval) {
+    if(newlwval < minlw)
+        newlwval = minlw;
+    else if(newlwval > maxlw)
+        newlwval = maxlw;
+    draw_width = newlwval;
+    lwval.innerHTML = draw_width;
+}
+var minlw = 6;
+var maxlw = 18;
+var interval = 3;
+
+
+const lwdec = document.getElementById("lwdec");
+const lwinc = document.getElementById("lwinc");
+lwdec.addEventListener("click", function(){
+    set_lw(draw_width - interval);
+});
+lwinc.addEventListener("click", function(){
+    set_lw(draw_width + interval);
+});
 
 function start(event) {
     is_drawing = true;
@@ -88,6 +122,15 @@ function canvasUndo() {
         context.putImageData(restore_array[index], 0, 0);
     }
 }
+
+canvas.addEventListener("touchmove", function (e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousemove", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+  }, false);
 
 function canvasPredict(event) {
     const img = canvas.toDataURL();
