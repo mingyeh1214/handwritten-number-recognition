@@ -162,8 +162,8 @@ function canvasPredict(event) {
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");
            
-            document.getElementById("canvas_output").src = result["canvas_img_url"] + "?" + new Date().getTime();
-            document.getElementById("process_output").src = result["process_img_url"] + "?" + new Date().getTime();
+            document.getElementById("canvas_output").src = result["canvas_img_url"];
+            document.getElementById("process_output").src = result["process_img_url"];
 
             canvas_predict.disabled = false;
             canvas_predict.innerHTML = ' Predict';
