@@ -4,10 +4,16 @@ import pandas as pd
 import io
 from cv2 import cv2
 
+global bucket_name
+bucket_name = "stone-resource-311918-bucket"
+def bucket_file_url(file_name):
+    url = "https://storage.googleapis.com/" + bucket_name + "/{}".format(file_name)
+    return url
+
 ####本機上測試用####
 #PATH = os.path.join(os.getcwd(), 'gcp_bucket.json')
 #os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
-#bucket = storage.Client(PATH).get_bucket("stone-resource-311918-bucket")
+#bucket = storage.Client(PATH).get_bucket(bucket_name)
 
 ####deploy時使用####
 CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']

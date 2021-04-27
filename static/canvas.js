@@ -133,6 +133,8 @@ canvas.addEventListener("touchmove", function (e) {
   }, false);
 
 function canvasPredict(event) {
+    canvas_predict.disabled = true;
+    canvas_predict.innerHTML = ' Predict <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
     const img = canvas.toDataURL();
     $.ajax({
         type: "POST",
@@ -160,8 +162,12 @@ function canvasPredict(event) {
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");
            
-            document.getElementById("canvas_output").src = result["canvas_img_url"];
-            document.getElementById("process_output").src = result["process_img_url"];
+            document.getElementById("canvas_output").src = result["canvas_img_url"] + "?" + new Date().getTime();
+            document.getElementById("process_output").src = result["process_img_url"] + "?" + new Date().getTime();
+
+            canvas_predict.disabled = false;
+            canvas_predict.innerHTML = ' Predict';
+
 
         }
     });
@@ -170,6 +176,16 @@ function canvasPredict(event) {
 
     event.preventDefault();
 }
+
+//$(document).ready(function() {
+ //   $("#canvas_predict").click(function() {
+        // disable button
+  //      $(this).prop("disabled", true);
+        // add spinner to button
+    //    $('canvas_predict').html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...`);
+       // );
+    ///});
+//});
 
 function highcharts_bar(keys, values, id) {
     var chart = {

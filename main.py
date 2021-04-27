@@ -25,7 +25,7 @@ def parseImg(imgData):
     write_csv_bucket(img_df, "img.csv")
 
     file_name = "canvas_img_" + str(img_idx) + ".png"
-    canvas_img_url = "https://storage.googleapis.com/stone-resource-311918-bucket/{}".format(file_name)
+    canvas_img_url = bucket_file_url(file_name)
     imgstr = re.search(b'base64,(.*)', imgData).group(1)
     with open("temp.png", 'wb') as output:
         output.write(base64.decodebytes(imgstr))
@@ -52,7 +52,7 @@ def parseImg(imgData):
     image = image_grey2black(image, 255 / 8)
 
     file_name = "process_img_" + str(img_idx) + ".png"
-    process_img_url = "https://storage.googleapis.com/stone-resource-311918-bucket/{}".format(file_name) 
+    process_img_url = bucket_file_url(file_name)
     write_png_bucket(image, file_name)
 
     img = image.reshape(1,28,28,1) / 255.0
