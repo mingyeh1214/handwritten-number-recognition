@@ -20,20 +20,22 @@ model_NN, model_CNN, model_NN2, model_CNN2 = init_models()
 
 def parseImg(imgData):
     #img_df = read_csv_bucket("img.csv")
-    img_df = pd.read_csv("img.csv", index_col = None, encoding = 'UTF-8', sep = ',')
-    img_idx = np.max(img_df["index"]) + 1
-    img_df = img_df.append(pd.Series({'index': img_idx}), ignore_index = True)
+    #img_df = pd.read_csv("./static/img.csv", index_col = None, encoding = 'UTF-8', sep = ',')
+    #img_df = pd.read_csv("https://storage.googleapis.com/stone-resource-311918-bucket/img.csv")
+    #img_idx = np.max(img_df["index"]) + 1
+    #img_df = img_df.append(pd.Series({'index': img_idx}), ignore_index = True)
     #write_csv_bucket(img_df, "img.csv")
-    img_df.to_csv("img.csv", index = False)
+    #img_df.to_csv("./static/img.csv", index = False)
+    img_idx = get_img_idx()
 
     file_name = "canvas_img_" + str(img_idx) + ".png"
     canvas_img_url = bucket_file_url(file_name)
     imgstr = re.search(b'base64,(.*)', imgData).group(1)
-    with open("temp.png", 'wb') as output:
+    with open("./static/temp.png", 'wb') as output:
         output.write(base64.decodebytes(imgstr))
-    bucket.blob(file_name).upload_from_filename("temp.png", content_type = 'image/png')
+    bucket.blob(file_name).upload_from_filename("./static/temp.png", content_type = 'image/png')
     
-    image = cv2.imread("temp.png")
+    image = cv2.imread("./static/temp.png")
     image = 255 - cv2.cvtColor(image.copy(), cv2.COLOR_BGR2GRAY)
     image = image_grey2black(image, 255 / 8)
     contours, _ = cv2.findContours(image.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
