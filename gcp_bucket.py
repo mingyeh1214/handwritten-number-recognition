@@ -12,14 +12,14 @@ def bucket_file_url(file_name):
     return url
 
 ####本機上測試用####
-PATH = os.path.join(os.getcwd(), 'gcp_bucket.json')
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
-bucket = storage.Client(PATH).get_bucket(bucket_name)
+#PATH = os.path.join(os.getcwd(), 'gcp_bucket.json')
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
+#bucket = storage.Client(PATH).get_bucket(bucket_name)
 
 ####deploy時使用####
-#CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
-#storage_client = storage.Client()
-#bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
+CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
+storage_client = storage.Client()
+bucket = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
 
 def get_img_idx():
     blob = bucket.get_blob("img.csv")
