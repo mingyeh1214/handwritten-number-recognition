@@ -20,11 +20,11 @@ model_NN, model_CNN, model_NN2, model_CNN2 = init_models()
 
 def parseImg(imgData):
     #img_df = read_csv_bucket("img.csv")
-    img_df = pd.read_csv("./static/dataset/img.csv", index_col = None, encoding = 'UTF-8', sep = ',')
+    img_df = pd.read_csv("img.csv", index_col = None, encoding = 'UTF-8', sep = ',')
     img_idx = np.max(img_df["index"]) + 1
     img_df = img_df.append(pd.Series({'index': img_idx}), ignore_index = True)
     #write_csv_bucket(img_df, "img.csv")
-    img_df.to_csv("./static/dataset/img.csv", index = False)
+    img_df.to_csv("img.csv", index = False)
 
     file_name = "canvas_img_" + str(img_idx) + ".png"
     canvas_img_url = bucket_file_url(file_name)
