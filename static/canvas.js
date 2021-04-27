@@ -141,6 +141,10 @@ function canvasPredict(event) {
         url: "/predict/",
         data: img,
         success: function(result){
+            console.log("img_idx:");
+            console.log(result["img_idx"]);
+            document.getElementById("canvas_output").src = result["canvas_img_url"];
+            document.getElementById("process_output").src = result["process_img_url"];
             $('#NN_result').text('Forecast: ' + result["NN_result"]);
             $('#CNN_result').text('Forecast: ' + result["CNN_result"]);
             $('#NN2_result').text('Forecast: ' + result["NN2_result"]);
@@ -161,15 +165,8 @@ function canvasPredict(event) {
             let CNN2_keys = Object.keys(CNN2_pred);
             let CNN2_values = Object.values(CNN2_pred);
             highcharts_bar(CNN2_keys, CNN2_values, "#CNN2_result_bar");
-            
-            console.log(result["img_idx"]);
-            document.getElementById("canvas_output").src = result["canvas_img_url"];
-            document.getElementById("process_output").src = result["process_img_url"];
-
             canvas_predict.disabled = false;
             canvas_predict.innerHTML = ' Predict';
-
-
         }
     });
 
