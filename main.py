@@ -28,12 +28,12 @@ def parseImg(imgData):
     #img_df.to_csv("./static/img.csv", index = False)
     img_idx = get_img_idx()
 
-    file_name = "canvas_img_" + str(img_idx) + ".png"
-    canvas_img_url = bucket_file_url(file_name)
+    canvas_img_file_name = "canvas_img_" + str(img_idx) + ".png"
+    canvas_img_url = bucket_file_url(canvas_img_file_name)
     imgstr = re.search(b'base64,(.*)', imgData).group(1)
     with open("./static/temp.png", 'wb') as output:
         output.write(base64.decodebytes(imgstr))
-    bucket.blob(file_name).upload_from_filename("./static/temp.png", content_type = 'image/png')
+    upload_canvas_img(canvas_img_file_name)
     
     image = cv2.imread("./static/temp.png")
     image = 255 - cv2.cvtColor(image.copy(), cv2.COLOR_BGR2GRAY)
@@ -55,9 +55,9 @@ def parseImg(imgData):
     image = cv2.resize(inp[0], (28, 28))
     image = image_grey2black(image, 255 / 8)
 
-    file_name = "process_img_" + str(img_idx) + ".png"
-    process_img_url = bucket_file_url(file_name)
-    write_png_bucket(image, file_name)
+    process_img_file_name = "process_img_" + str(img_idx) + ".png"
+    process_img_url = bucket_file_url(process_img_file_name)
+    upload_process_png(image, process_img_file_name)
 
     img = image.reshape(1,28,28,1) / 255.0
 
