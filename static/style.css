@@ -1,0 +1,77 @@
+#canvas_input {
+  cursor: crosshair;
+}
+
+#color_fields {
+  float: left;
+}
+
+.color_field {
+  height: 25px;
+  width: 25px;
+  min-height: 25px;
+  min-height: 25px;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 50%;
+  cursor: pointer;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #A9A9A9;
+}
+
+.color_field.active {
+  border-width: 3px;
+}
+
+.lwcontral {
+  display: inline-block;
+  text-align: center;
+}
+
+#canvas_output {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+}
+
+#process_output {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+}
+
+.highcharts_bar {
+  height: 250px;
+}
+
+.confusion_matrix {
+  width: 400px;
+}
+
+.accuracy {
+  width: 400px;
+}
+
+.loss {
+  width: 400px;
+}
+
+.background-mnist { 
+  /* The image used 
+  background-image: url('images/background_mnist.png');
+  */
+  
+  /* Full height */
+  height: 250px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}

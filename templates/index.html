@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Handwritten Number Recognition</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-light bg-light border-bottom">
+      <div class="container-fluid">
+        <span class="navbar-brand">
+          <img src="{{ url_for('static', filename='images/navbar-brand.png') }}" alt="" height="30", class="d-inline-block align-top">
+          Handwritten Number Recognition
+        </span>
+        <!-- <span class="navbar-text">
+          Handwritten Number Recognition
+          <a role="button" class="btn btn-outline-secondary btn-sm">My Profolio <i class="fas fa-user-circle"></i></a>
+          <a role="button" class="btn btn-outline-secondary btn-sm" href="https://github.com/mingyeh1214/handwritten-number-recognition/" target="_blank">View On GitHub <i class="fab fa-github"></i></a>
+        </span> -->
+        
+        
+      </div>
+    </nav>
+
+  <div class="container-fluid">
+    <div class="mt-2 rounded-3 text-center background-mnist" style="background-image: url('static/images/background_mnist.png');">
+      <div class="d-flex justify-content-center align-items-center h-100">
+          <canvas id="canvas_input" class="border border-dark rounded-lg shadow-sm border-3"></canvas>
+      </div>
+  </div>
+  </div>
+    
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 d-flex justify-content-center">
+            <div id="color_fields" class="m-2">
+              <div class="color_field active" style="background-color: black;"></div>
+              <div class="color_field" style="background-color: red;"></div>
+              <div class="color_field" style="background-color: green;"></div>
+              <div class="color_field" style="background-color: blue;"></div>
+            </div>
+            <div id="lw" class="m-2">
+              <button type="button" id="lwdec" class="lwcontral btn btn-sm btn-outline-success fas fa-minus-square fa-lg"></button>
+              <button type="button" id="lwinc" class="lwcontral btn btn-sm btn-outline-success fas fa-plus-square fa-lg"></button>
+              Line Width:
+              <span id="lwval">12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" id="canvas_clear" class="btn btn-outline-primary btn-sm m-1 fas fa-trash-alt"> Clear</button>
+          <button type="button" id="canvas_undo" class="btn btn-outline-primary btn-sm m-1 fas fa-undo-alt"> Undo</button>
+          <button type="button" id="canvas_predict" class="btn btn-outline-primary btn-sm m-1 fas fa-grin-alt"> Predict</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row justify-content-center mt-2">
+        <div class="col-12 d-flex justify-content-center">
+          <img id="canvas_output" class="m-2">
+          <img id="process_output" class="m-2" hidden> 
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid mt-2">
+      <div class="row">
+        <div class="col-sm mb-2">
+          <div class="card">
+
+            <h5 class="card-header">
+              NN
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="NN_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="NN_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mb-2">
+          <div class="card">
+            
+            <h5 class="card-header">
+              NN2
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="NN2_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="NN2_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mb-2">
+          <div class="card">
+            
+            <h5 class="card-header">
+              CNN
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="CNN_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="CNN_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-sm mb-2">
+          <div class="card">
+            
+            <h5 class="card-header">
+              CNN2
+            </h5>
+            <div class="card-body">
+              <h5 class="card-title" id="CNN2_result"></h5>
+              <p class="card-text">...</p>
+              <div class="highcharts_bar" id="CNN2_result_bar"></div>
+            </div>
+            <div class="card-footer text-muted">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p>Fully Connection NN Performance</p>
+          <img class="accuracy" src="{{ url_for('static', filename='images/NN_accuracy.png') }}">
+          <img class="loss" src="{{ url_for('static', filename='images/NN_loss.png') }}">
+          <img class="confusion_matrix" src="{{ url_for('static', filename='images/NN_confusion_matrix.png') }}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p>CNN Performance</p>
+          <img class="accuracy" src="{{ url_for('static', filename='images/CNN_accuracy.png') }}">
+          <img class="loss" src="{{ url_for('static', filename='images/CNN_loss.png') }}">
+          <img class="confusion_matrix" src="{{ url_for('static', filename='images/CNN_confusion_matrix.png') }}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p>Fully Connection NN2 Performance</p>
+          <img class="accuracy" src="{{ url_for('static', filename='images/NN2_accuracy.png') }}">
+          <img class="loss" src="{{ url_for('static', filename='images/NN2_loss.png') }}">
+          <img class="confusion_matrix" src="{{ url_for('static', filename='images/NN2_confusion_matrix.png') }}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p>CNN2 Performance</p>
+          <img class="accuracy" src="{{ url_for('static', filename='images/CNN2_accuracy.png') }}">
+          <img class="loss" src="{{ url_for('static', filename='images/CNN2_loss.png') }}">
+          <img class="confusion_matrix" src="{{ url_for('static', filename='images/CNN2_confusion_matrix.png') }}">
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='canvas.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://kit.fontawesome.com/9ad29e75bb.js" crossorigin="anonymous"></script>
+  </body>
+</html>
