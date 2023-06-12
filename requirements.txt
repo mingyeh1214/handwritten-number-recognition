@@ -12,9 +12,6 @@ Flask==2.3.2
 flatbuffers==23.5.26
 fonttools==4.39.4
 gast==0.4.0
-google-auth==2.19.1
-google-auth-oauthlib==1.0.0
-google-pasta==0.2.0
 grpcio==1.54.2
 h5py==3.8.0
 idna==3.4
