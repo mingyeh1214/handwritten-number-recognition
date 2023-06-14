@@ -5,6 +5,7 @@ import cv2
 import tensorflow as tf
 import numpy as np
 import json
+import os
 from train import image_grey2black
 import pandas as pd
 
@@ -115,4 +116,5 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    port = int(os.environ.get('PORT',5000))
+    app.run(host="0.0.0.0",port=port,debug=True)
